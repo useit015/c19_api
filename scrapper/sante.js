@@ -59,7 +59,6 @@ function getRegions (table, getFormatedText) {
 }
 
 async function getStats () {
-
 	const { $, getText, getFormatedText } = await load('http://www.covidmaroc.ma')
 
 	const tables = $('table')
@@ -108,7 +107,7 @@ async function fillContent (articles) {
 	)
 
 	handles.forEach(({ getTextFrom }, i) => {
-		articles[ i ].content = getTextFrom('.desc', 'div')
+		articles[ i ].content = getTextFrom('.desc', '.MsoNormal') || getTextFrom('.desc', 'div')
 	})
 
 	return articles

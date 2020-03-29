@@ -5,12 +5,14 @@ const Stat = require('../models/Stat')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
+	const fields = {
+		__v: false,
+		_id: false
+	}
+
 	try {
 		res.json(
-			await Stat.findOne({}, {
-				__v: false,
-				_id: false
-			})
+			await Stat.findOne({}, fields)
 		)
 	} catch (err) {
 		res.json({
