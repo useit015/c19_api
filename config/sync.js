@@ -39,7 +39,6 @@ async function syncArticlesMap () {
 		await getAllNews()
 	)
 
-	console.log(articles)
 	if (articles.length) {
 		await ArticleMap.insertMany(articles)
 	}
