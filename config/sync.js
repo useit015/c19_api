@@ -1,7 +1,7 @@
 const cron = require('node-cron')
 
 const Stat = require('../models/Stat')
-const Article = require('../models/Article')
+const HealthArticle = require('../models/HealthArticle')
 const { getStats, getArticles, fillContent } = require('../scrapper/sante')
 
 async function syncStats () {
@@ -19,12 +19,12 @@ function filterExistingArticles (existing, articles) {
 
 async function syncArticles () {
 	const articles = filterExistingArticles(
-		await Article.find(),
+		await HealthArticle.find(),
 		await getArticles()
 	)
 
 	if (articles.length) {
-		await Article.insertMany(
+		await HealthArticle.insertMany(
 			await fillContent(articles)
 		)
 	}
