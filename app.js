@@ -16,6 +16,7 @@ app.use(cors())
 db.connect().then(sync.init)
 
 app.use('/stats', require('./api/stats'))
+app.use('/sante', require('./api/sante'))
 
 app.listen(
 	PORT,
