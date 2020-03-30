@@ -2,7 +2,10 @@ const cron = require('node-cron')
 
 const Stat = require('../models/Stat')
 const HealthArticle = require('../models/HealthArticle')
+const ArticleMap = require('../models/ArticleMap')
 const { getStats, getArticles, fillContent } = require('../scrapper/sante')
+const { getAllNews } = require('../scrapper/map')
+
 
 async function syncStats () {
 	const stats = await getStats()
@@ -30,11 +33,23 @@ async function syncArticles () {
 	}
 }
 
+async function syncArticlesMap () {
+	const articles = filterExistingArticles(
+		await ArticleMap.find(),
+		await getAllNews()
+	)
+
+	if (articles.length) {
+		await ArticleMap.insertMany(articles)
+	}
+}
+
 async function sync () {
 	try {
 		await Promise.all([
 			syncStats(),
-			syncArticles()
+			syncArticles(),
+			syncArticlesMap()
 		])
 
 		console.log('Sync done successfuly')
@@ -46,6 +61,6 @@ async function sync () {
 module.exports = {
 	init () {
 		// Schedule to run every hour at the tenth minute
-		cron.schedule('10 * * * *', sync)
+		cron.schedule('10 * * * *', sync())
 	}
 }

@@ -21,6 +21,8 @@ app.use('/api-docs.json', require('./config/doc'))
 
 app.use('/stats', require('./api/stats'))
 app.use('/sante', require('./api/sante'))
+app.use('/mapdata', require('./api/mapdata'))
+
 
 app.listen(
 	PORT,
