@@ -25,7 +25,7 @@ async function getMapNews(url) {
 		}
 
 	})
-	news = await addArticles(news)
+	// news = await addArticles(news)
 	return news
 }
 
@@ -60,14 +60,11 @@ async function getAllNews(){
 	let news = [];
 
 	let url = "http://mapanticorona.map.ma/"
-	let i = 0;
-	let page = `ar?page=${i}`
-
 	
-	do {
+	for (let i = 0; i < 15; i++) {
+		let page = `?page=${i}`
 		news = news.concat(await getMapNews(url.concat(page)))
-		i = i + 1;
-	} while (i < 15)
+	}
 
 	return news
 }
@@ -130,6 +127,6 @@ async function updateNews(title) {
 
 module.exports = {
 	getAllNews,
-	updateNews,
+	addArticles,
 }
 
