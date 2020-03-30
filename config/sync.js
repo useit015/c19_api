@@ -63,7 +63,6 @@ async function sync () {
 module.exports = {
 	init () {
 		// Schedule to run every hour at the tenth minute
-		// cron.schedule('10 * * * *', sync)
-		sync()
+		cron.schedule('10 * * * *', sync)
 	}
 }
