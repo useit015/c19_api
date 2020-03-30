@@ -49,8 +49,8 @@ async function syncArticlesMap () {
 async function sync () {
 	try {
 		await Promise.all([
-			// syncStats(),
-			// syncArticles(),
+			syncStats(),
+			syncArticles(),
 			syncArticlesMap()
 		])
 
