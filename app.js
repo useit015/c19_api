@@ -15,6 +15,10 @@ app.use(cors())
 
 db.connect().then(sync.init)
 
+app.use(express.static(__dirname + '/public'))
+
+app.use('/api-docs.json', require('./config/doc'))
+
 app.use('/stats', require('./api/stats'))
 app.use('/sante', require('./api/sante'))
 
