@@ -1,10 +1,11 @@
 const cron = require('node-cron')
 
 const Stat = require('../models/Stat')
+const MapArticle = require('../models/MapArticle')
 const HealthArticle = require('../models/HealthArticle')
-const ArticleMap = require('../models/ArticleMap')
+
 const { getStats, getArticles, fillContent } = require('../scrapper/sante')
-const { getAllNews, addArticles} = require('../scrapper/map')
+const { getAllNews, addArticles } = require('../scrapper/map')
 
 
 async function syncStats () {
@@ -35,12 +36,12 @@ async function syncArticles () {
 
 async function syncArticlesMap () {
 	const articles = filterExistingArticles(
-		await ArticleMap.find(),
+		await MapArticle.find(),
 		await getAllNews()
 	)
 
 	if (articles.length) {
-		await ArticleMap.insertMany(
+		await MapArticle.insertMany(
 			await addArticles(articles)
 		)
 	}

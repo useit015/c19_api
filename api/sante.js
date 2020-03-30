@@ -6,18 +6,19 @@ const router = express.Router()
 
 /**
  * @swagger
- * definitions:
- *   HealthArticle:
- *     type: object
- *     properties:
- *       id:
- *         type: string
- *       title:
- *         type: string
- *       href:
- *         type: string
- *       content:
- *         type: string
+ * components:
+ *   schemas:
+ *     HealthArticle:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *         title:
+ *           type: string
+ *         href:
+ *           type: string
+ *         content:
+ *           type: string
  */
 
 /**
@@ -48,7 +49,7 @@ const router = express.Router()
  *         schema:
  *           type: array
  *           items:
- *             $ref: '#/definitions/HealthArticle'
+ *             $ref: '#/components/schemas/HealthArticle'
  *       500:
  *         description: Error message
  *         schema:
