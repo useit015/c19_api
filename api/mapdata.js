@@ -20,6 +20,8 @@ const router = express.Router()
  *           type: string
  *         content:
  *           type: string
+ * 		   time:
+ * 			 type: string
  */
 
 /**
